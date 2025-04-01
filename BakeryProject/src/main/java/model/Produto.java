@@ -24,6 +24,10 @@ public class Produto {
         this.categoria = categoria;
     }
 
+    public Produto() {
+       
+    }
+
     public String getNome() {
         return nome;
     }

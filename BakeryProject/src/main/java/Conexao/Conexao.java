@@ -17,9 +17,9 @@ import java.sql.SQLException;
 public class Conexao {
 
     private static final String DRIVE_MYSQL = "com.mysql.cj.jdbc.Driver";
-    private static final String ENDERECO = "jdbc:mysql://localhost:3306/bakery";
+    private static final String ENDERECO = "jdbc:mysql://localhost:3312/bakery";
     private static final String USUARIO = "root";
-    private static final String SENHA = "1010";
+    private static final String SENHA = "";
 
     public static Connection getConexao() {
 
