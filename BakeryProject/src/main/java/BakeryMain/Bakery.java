@@ -30,7 +30,7 @@ public static void main(String[] args) throws Exception {
         
          DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                     
-        Funcionario f1 = new Funcionario("Joseph Borges Morais", "2485592984", LocalDate.parse("16/07/2004", formatter), "Feira de santana", "75983237776", "joaonsousa@gmail.com",
+        Funcionario f1 = new Funcionario(null, "Joseph Borges Morais", "2485592984", LocalDate.parse("16/07/2004", formatter), "Feira de santana", "75983237776", "joaonsousa@gmail.com",
                 "Padeiro", "Padaria", 1500);
         
         funcionarioDAO.incluir(f1);

@@ -317,47 +317,48 @@ public class CadastroFuncionario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cadastrarFuncionarioActionPerformed
     
     private void cadastrarFuncionario() {
-    try {
-        LocalDate dataNascimento;
         try {
-            DateTimeFormatter formatoBrasileiro = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            dataNascimento = LocalDate.parse(jDataText.getText(), formatoBrasileiro);
-        } catch (DateTimeParseException e1) {
+            LocalDate dataNascimento;
             try {
-                dataNascimento = LocalDate.parse(jDataText.getText());
-            } catch (DateTimeParseException e2) {
-                throw new IllegalArgumentException("Formato de data inválido! Use dd/MM/aaaa ou aaaa-MM-dd");
+                DateTimeFormatter formatoBrasileiro = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                dataNascimento = LocalDate.parse(jDataText.getText(), formatoBrasileiro);
+            } catch (DateTimeParseException e1) {
+                try {
+                    dataNascimento = LocalDate.parse(jDataText.getText());
+                } catch (DateTimeParseException e2) {
+                    throw new IllegalArgumentException("Formato de data inválido! Use dd/MM/aaaa ou aaaa-MM-dd");
+                }
             }
-        }
-        
-        Funcionario funcionario = new Funcionario(
-            nomeFuncionario.getText(),
-            cpfFuncionario.getText(),
-            dataNascimento, 
-            enderecoFuncionario.getText(), 
-            telefoneFuncionario.getText(),
-            emailFuncionario.getText(),
-            cargoFuncionario.getText(),
-            departamentoFuncionario.getText(),
-            Double.parseDouble(salarioFuncionario.getText())
-        );
-            FuncionarioDAO dao = new FuncionarioDAO();
-            try {
-            dao.incluir(funcionario);
-            JOptionPane.showMessageDialog(this, "Funcionário cadastrado com sucesso!\nCPF: " + funcionario.getCpf());
-            limparCamposFuncionario();
+
+            Funcionario funcionario = new Funcionario(
+                null,
+                nomeFuncionario.getText(),
+                cpfFuncionario.getText(),
+                dataNascimento, 
+                enderecoFuncionario.getText(), 
+                telefoneFuncionario.getText(),
+                emailFuncionario.getText(),
+                cargoFuncionario.getText(),
+                departamentoFuncionario.getText(),
+                Double.parseDouble(salarioFuncionario.getText())
+            );
+                FuncionarioDAO dao = new FuncionarioDAO();
+                try {
+                dao.incluir(funcionario);
+                JOptionPane.showMessageDialog(this, "Funcionário cadastrado com sucesso!\nCPF: " + funcionario.getCpf());
+                limparCamposFuncionario();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Erro ao cadastrar funcionário: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+            }
+
+        } catch (DateTimeParseException e) {
+            JOptionPane.showMessageDialog(this, "Formato de data inválido! Use o formato yyyy-MM-dd", "Erro", JOptionPane.ERROR_MESSAGE);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Salário deve ser um número válido!", "Erro", JOptionPane.ERROR_MESSAGE);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Erro ao cadastrar funcionário: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
-         
-    } catch (DateTimeParseException e) {
-        JOptionPane.showMessageDialog(this, "Formato de data inválido! Use o formato yyyy-MM-dd", "Erro", JOptionPane.ERROR_MESSAGE);
-    } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(this, "Salário deve ser um número válido!", "Erro", JOptionPane.ERROR_MESSAGE);
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "Erro ao cadastrar funcionário: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
     }
-}
 
 private void limparCamposFuncionario() {
     nomeFuncionario.setText("");

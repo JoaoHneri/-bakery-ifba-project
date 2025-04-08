@@ -5,6 +5,7 @@ import java.time.LocalDate;
 
 public class Funcionario {
     // Informações pessoais
+    private Long id;
     private String nome;
     private String cpf;
     private LocalDate dataNascimento;
@@ -15,9 +16,10 @@ public class Funcionario {
     private String departamento;
     private double salario;
 
-    public Funcionario(String nome, String cpf, LocalDate dataNascimento, 
+    public Funcionario(Long id, String nome, String cpf, LocalDate dataNascimento, 
                        String endereco, String telefone, String email, 
                        String cargo, String departamento, double salario) {
+        this.id = id;
         this.nome = nome;
         this.cpf = cpf;
         this.dataNascimento = dataNascimento;
@@ -28,8 +30,17 @@ public class Funcionario {
         this.departamento = departamento;
         this.salario = salario;
     }
+    
+    
+    public Long getId() {
+        return id;
+    }
 
     // Getters and setters
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getNome() {
         return nome;
     }
@@ -101,4 +112,5 @@ public class Funcionario {
     public void setSalario(double salario) {
         this.salario = salario;
     }
+
 }
