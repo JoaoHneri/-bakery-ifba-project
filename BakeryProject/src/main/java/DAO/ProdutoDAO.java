@@ -130,4 +130,34 @@ public class ProdutoDAO {
             throw new Exception(e);
         }
     }
+    
+    public List<Produto> buscarPorNome(String nomeParcial) throws Exception {
+        var sql = "SELECT * FROM produto WHERE nome LIKE ?";
+        List<Produto> produtos = new ArrayList<>();
+
+        try (var conexao = Conexao.getConexao();
+             var stmt = conexao.prepareStatement(sql)) {
+
+            // Adiciona os % para busca parcial antes e depois do termo
+            stmt.setString(1, "%" + nomeParcial + "%");
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    Produto produto = new Produto(
+                        rs.getLong("id"), 
+                        rs.getString("nome"), 
+                        rs.getDouble("valor"), 
+                        rs.getInt("quantidade"), 
+                        rs.getString("categoria")
+                    );
+                    produtos.add(produto);
+                    System.out.println(produto.toString());
+                }
+            }
+        } catch (SQLException e) {
+            throw new Exception("Erro ao buscar produtos por nome: " + e.getMessage(), e);
+        }
+
+        return produtos;
+    }
 }

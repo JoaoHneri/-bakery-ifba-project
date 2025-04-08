@@ -10,11 +10,13 @@ import java.time.format.DateTimeFormatter;
 import model.Funcionario;
 import model.Produto;
 import DAO.ProdutoDAO;
+import DAO.VendaDAO;
 import java.io.Console;
 import java.io.Console;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
+import model.Venda;
 
 /**
  *
@@ -26,15 +28,25 @@ public class Bakery {
 
 public static void main(String[] args) throws Exception {
         FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+        VendaDAO vendaDAO = new VendaDAO();
+        ProdutoDAO produtoDAO = new ProdutoDAO();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        Produto prod = new Produto(3L, "Cacetinho", 2.0, 2, "Fermento");
+        Venda venda = new Venda(1L, prod, 2, 4.0, LocalDate.parse("2004-07-16"));
         
+        try {
+        produtoDAO.buscarPorNome("Cac");
+        System.out.println("Incluido com sucesso!");
+            
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
         
-         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-                    
-        Funcionario f1 = new Funcionario(null, "Joseph Borges Morais", "2485592984", LocalDate.parse("16/07/2004", formatter), "Feira de santana", "75983237776", "joaonsousa@gmail.com",
-                "Padeiro", "Padaria", 1500);
+       /// Funcionario f1 = new Funcionario(null, "Joseph Borges Morais", "2485592984", LocalDate.parse("16/07/2004", formatter), "Feira de santana", "75983237776", "joaonsousa@gmail.com",
+              ///  "Padeiro", "Padaria", 1500);
         
-        funcionarioDAO.incluir(f1);
-        
+        ///funcionarioDAO.incluir(f1);
+        ///;
         
        /* int opcao;
         do {
