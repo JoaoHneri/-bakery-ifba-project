@@ -6,14 +6,19 @@ package View.produtos;
 
 import DAO.FuncionarioDAO;
 import DAO.ProdutoDAO;
+import DAO.VendaDAO;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 import model.ItemPedido;
 import model.Produto;
+import model.Venda;
 /**
  *
  * @author joaoh
@@ -28,14 +33,9 @@ public class VendaItensInternalFrame extends javax.swing.JInternalFrame {
     
     public VendaItensInternalFrame() {
         initComponents();
-        ProdutoDAO produtoDAO = new ProdutoDAO();
-        List<Produto> produtos;
-        try {
-            produtos = produtoDAO.buscarTodos();
-            popularProdutos(produtos);
-        } catch (Exception ex) {
-            Logger.getLogger(VendaItensInternalFrame.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        buscarTodosProdutos();
+        verificarValoresParaTroco();
+        
     }
 
     /**
@@ -62,9 +62,9 @@ public class VendaItensInternalFrame extends javax.swing.JInternalFrame {
         selecionadosTable = new javax.swing.JTable();
         jLabel5 = new javax.swing.JLabel();
         concluirVenda = new javax.swing.JButton();
-        jLabel6 = new javax.swing.JLabel();
+        labelTroco = new javax.swing.JLabel();
         valorEntregue = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
+        LabelValorTotal = new javax.swing.JLabel();
         quantidadeProdInput = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
 
@@ -113,6 +113,11 @@ public class VendaItensInternalFrame extends javax.swing.JInternalFrame {
         });
 
         RemoverItemDoSelecionado.setText("Remover");
+        RemoverItemDoSelecionado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RemoverItemDoSelecionadoActionPerformed(evt);
+            }
+        });
 
         limparCarrinho.setText("Limpar Carrinho");
         limparCarrinho.addActionListener(new java.awt.event.ActionListener() {
@@ -153,10 +158,21 @@ public class VendaItensInternalFrame extends javax.swing.JInternalFrame {
         jLabel5.setText("RESULTADO");
 
         concluirVenda.setText("Fechar Venda");
+        concluirVenda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                concluirVendaActionPerformed(evt);
+            }
+        });
 
-        jLabel6.setText("Troco");
+        labelTroco.setText("Troco");
 
-        jLabel7.setText("Valor Total");
+        valorEntregue.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                valorEntregueActionPerformed(evt);
+            }
+        });
+
+        LabelValorTotal.setText("Valor Total");
 
         quantidadeProdInput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -201,11 +217,11 @@ public class VendaItensInternalFrame extends javax.swing.JInternalFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabel6))
+                                .addComponent(labelTroco))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel7)
+                                .addComponent(LabelValorTotal)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(concluirVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -253,11 +269,11 @@ public class VendaItensInternalFrame extends javax.swing.JInternalFrame {
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel2)
-                                    .addComponent(jLabel6))
+                                    .addComponent(labelTroco))
                                 .addGap(20, 20, 20)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel3)
-                                    .addComponent(jLabel7)))
+                                    .addComponent(LabelValorTotal)))
                             .addComponent(concluirVenda, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addGap(20, 20, 20))
@@ -285,7 +301,6 @@ public class VendaItensInternalFrame extends javax.swing.JInternalFrame {
         try {
             produtos = produtoDAO.buscarPorNome(queryProdInput.getText());
             popularProdutos(produtos);
-            popularPedidos();
         } catch (Exception ex) {
             Logger.getLogger(VendaItensInternalFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -294,7 +309,36 @@ public class VendaItensInternalFrame extends javax.swing.JInternalFrame {
     private void limparCarrinhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limparCarrinhoActionPerformed
        limparCarrinho();
     }//GEN-LAST:event_limparCarrinhoActionPerformed
-    
+
+    private void RemoverItemDoSelecionadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoverItemDoSelecionadoActionPerformed
+        removerItensDaLista();
+    }//GEN-LAST:event_RemoverItemDoSelecionadoActionPerformed
+
+    private void concluirVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_concluirVendaActionPerformed
+        concluirVenda();
+    }//GEN-LAST:event_concluirVendaActionPerformed
+
+    private void valorEntregueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_valorEntregueActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_valorEntregueActionPerformed
+    public void verificarValoresParaTroco(){
+        valorEntregue.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                calcularTroco();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                calcularTroco();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                calcularTroco();
+            }
+        });
+    }
     public void popularProdutos(List<Produto> produtos) {
         try {
             DefaultTableModel modelo = (DefaultTableModel) produtosTable.getModel();
@@ -332,6 +376,8 @@ public class VendaItensInternalFrame extends javax.swing.JInternalFrame {
                     item.getValorTotal(),
                 });
             }
+            
+            calcularTroco();
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, 
@@ -354,14 +400,32 @@ public class VendaItensInternalFrame extends javax.swing.JInternalFrame {
 
             int quantidade;
             try {
-                quantidade = Integer.parseInt(quantidadeProdInput.getText().trim());
+                quantidade = Integer.parseInt(quantidadeProdInput.getText());
+
+                // Verifica se a quantidade é maior que zero
                 if (quantidade <= 0) {
-                    throw new NumberFormatException();
+                    JOptionPane.showMessageDialog(this, 
+                        "A quantidade deve ser maior que zero", 
+                        "Quantidade inválida", 
+                        JOptionPane.WARNING_MESSAGE);
+                    return;
                 }
+
+                // Verifica se há estoque suficiente (opcional)
+                int estoqueAtual = (Integer) produtosTable.getValueAt(linhaSelecionada, 2);
+                if (quantidade > estoqueAtual) {
+                    JOptionPane.showMessageDialog(this, 
+                        "Quantidade indisponível em estoque\n" +
+                        "Estoque atual: " + estoqueAtual, 
+                        "Estoque insuficiente", 
+                        JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(this, 
-                    "Digite uma quantidade válida (número inteiro positivo)", 
-                    "Erro", 
+                    "Digite um valor numérico válido para a quantidade", 
+                    "Formato inválido", 
                     JOptionPane.ERROR_MESSAGE);
                 return;
             }
@@ -389,6 +453,42 @@ public class VendaItensInternalFrame extends javax.swing.JInternalFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, 
                 "Erro ao adicionar item: " + e.getMessage(), 
+                "Erro", 
+                JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    public void removerItensDaLista() {
+        try {
+            int linhaSelecionada = selecionadosTable.getSelectedRow();
+            if (linhaSelecionada == -1) {
+                JOptionPane.showMessageDialog(this, 
+                    "Selecione um item para remover", 
+                    "Aviso", 
+                    JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            ItemPedido item = itensSelecionados.get(linhaSelecionada);
+
+            int confirmacao = JOptionPane.showConfirmDialog(
+                this,
+                "Deseja remover o item:\n" + item.getQuantidade() + " x " + item.getProdutoNome() + "?",
+                "Confirmar remoção",
+                JOptionPane.YES_NO_OPTION);
+
+            if (confirmacao == JOptionPane.YES_OPTION) {
+                itensSelecionados.remove(linhaSelecionada);
+                popularPedidos();
+
+                JOptionPane.showMessageDialog(this, 
+                    "Item removido com sucesso", 
+                    "Sucesso", 
+                    JOptionPane.INFORMATION_MESSAGE);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, 
+                "Erro ao remover item: " + e.getMessage(), 
                 "Erro", 
                 JOptionPane.ERROR_MESSAGE);
         }
@@ -436,10 +536,139 @@ public class VendaItensInternalFrame extends javax.swing.JInternalFrame {
         }
     }
     
+    public void concluirVenda() {                                              
+        try {
+            if (itensSelecionados.isEmpty()) {
+                JOptionPane.showMessageDialog(this, 
+                    "Nenhum item selecionado para venda", 
+                    "Aviso", 
+                    JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            double valorTotal = itensSelecionados.stream()
+                               .mapToDouble(ItemPedido::getValorTotal)
+                               .sum();
+
+            String mensagem = String.format(
+                "Confirmar venda de %d itens?\n\n" +
+                "Valor Total: R$ %.2f", 
+                itensSelecionados.size(), valorTotal);
+
+            int confirmacao = JOptionPane.showConfirmDialog(
+                this, 
+                mensagem, 
+                "Confirmar Venda", 
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE);
+
+            if (confirmacao != JOptionPane.YES_OPTION) {
+                return;
+            }
+
+            VendaDAO vendaDAO = new VendaDAO();
+            ProdutoDAO produtoDAO = new ProdutoDAO();
+            LocalDate dataVenda = LocalDate.now();
+
+            for (ItemPedido item : itensSelecionados) {
+
+                Produto produto = new Produto();
+                produto.setId(item.getProdutoId());
+
+
+                Venda venda = new Venda(
+                    null, // ID será gerado pelo banco
+                    produto,
+                    item.getQuantidade(),
+                    item.getValorTotal(),
+                    dataVenda
+                );
+
+
+                Long idVenda = vendaDAO.salvarVenda(venda);
+
+                try {
+                    produtoDAO.atualizarEstoque(item.getProdutoId(), -item.getQuantidade());
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(this,
+                        "Erro ao atualizar estoque do produto ID " + item.getProdutoId() + 
+                        "\n" + e.getMessage(),
+                        "Aviso",
+                        JOptionPane.WARNING_MESSAGE);
+                }
+            }
+
+            JOptionPane.showMessageDialog(this,
+                "Venda concluída com sucesso!\n" +
+                "Itens vendidos: " + itensSelecionados.size() + "\n" +
+                "Valor total: R$ " + String.format("%.2f", valorTotal),
+                "Venda Concluída",
+                JOptionPane.INFORMATION_MESSAGE);
+
+            itensSelecionados.clear();
+ 
+            buscarTodosProdutos();
+            popularPedidos();
+            
+
+            valorEntregue.setText("");
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this,
+                "Erro ao concluir venda:\n" + e.getMessage(),
+                "Erro",
+                JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
+    }
+    
+    public void buscarTodosProdutos(){
+        ProdutoDAO produtoDAO = new ProdutoDAO();
+        List<Produto> produtos;
+        try {
+            produtos = produtoDAO.buscarTodos();
+            popularProdutos(produtos);
+        } catch (Exception ex) {
+            Logger.getLogger(VendaItensInternalFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private void calcularTroco() {
+        try {
+            // Calcula o valor total dos itens
+            double total = itensSelecionados.stream()
+                             .mapToDouble(ItemPedido::getValorTotal)
+                             .sum();
+
+            // Atualiza o label do valor total
+            LabelValorTotal.setText(String.format("R$ %.2f", total));
+
+            // Verifica se o campo valorEntregue tem conteúdo
+            String valorStr = valorEntregue.getText().trim();
+            if (!valorStr.isEmpty()) {
+                double valorEntregue = Double.parseDouble(valorStr);
+
+                // Calcula o troco
+                double troco = valorEntregue - total;
+
+                // Atualiza o label do troco
+                if (troco >= 0) {
+                    labelTroco.setText(String.format("R$ %.2f", troco));
+                } else {
+                    labelTroco.setText("Valor insuficiente");
+                }
+            } else {
+                labelTroco.setText("R$ 0,00");
+            }
+        } catch (NumberFormatException e) {
+            labelTroco.setText("Valor inválido");
+        }
+    }
     
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel LabelValorTotal;
     private javax.swing.JButton RemoverItemDoSelecionado;
     private javax.swing.JButton addItemAoSelecionado;
     private javax.swing.JButton concluirVenda;
@@ -449,11 +678,10 @@ public class VendaItensInternalFrame extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel labelTroco;
     private javax.swing.JButton limparCarrinho;
     private javax.swing.JTable produtosTable;
     private javax.swing.JTextField quantidadeProdInput;

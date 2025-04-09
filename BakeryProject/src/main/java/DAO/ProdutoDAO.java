@@ -160,4 +160,23 @@ public class ProdutoDAO {
 
         return produtos;
     }
+    
+    public void atualizarEstoque(Long idProduto, int quantidade) throws Exception {
+        String sql = "UPDATE produto SET quantidade = quantidade + ? WHERE id = ?";
+
+        try (Connection conexao = Conexao.getConexao();
+             PreparedStatement stmt = conexao.prepareStatement(sql)) {
+
+            stmt.setInt(1, quantidade);
+            stmt.setLong(2, idProduto);
+
+            int affectedRows = stmt.executeUpdate();
+
+            if (affectedRows == 0) {
+                throw new Exception("Produto não encontrado ou estoque não atualizado");
+            }
+        } catch (SQLException e) {
+            throw new Exception("Erro ao atualizar estoque: " + e.getMessage(), e);
+        }
+    }
 }
