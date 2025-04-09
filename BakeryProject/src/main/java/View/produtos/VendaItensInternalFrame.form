@@ -320,7 +320,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="labelTroco">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Troco"/>
+        <Property name="text" type="java.lang.String" value="R$ 0,00"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="valorEntregue">
@@ -330,7 +330,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="LabelValorTotal">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Valor Total"/>
+        <Property name="text" type="java.lang.String" value="R$ 0,00"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="quantidadeProdInput">

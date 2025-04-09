@@ -164,7 +164,7 @@ public class VendaItensInternalFrame extends javax.swing.JInternalFrame {
             }
         });
 
-        labelTroco.setText("Troco");
+        labelTroco.setText("R$ 0,00");
 
         valorEntregue.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -172,7 +172,7 @@ public class VendaItensInternalFrame extends javax.swing.JInternalFrame {
             }
         });
 
-        LabelValorTotal.setText("Valor Total");
+        LabelValorTotal.setText("R$ 0,00");
 
         quantidadeProdInput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
