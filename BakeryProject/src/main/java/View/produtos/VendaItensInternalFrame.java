@@ -71,6 +71,8 @@ public class VendaItensInternalFrame extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setIconifiable(true);
+        setTitle("Janela de Vendas");
+        setToolTipText("Janela de Vendas");
 
         queryProdInput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

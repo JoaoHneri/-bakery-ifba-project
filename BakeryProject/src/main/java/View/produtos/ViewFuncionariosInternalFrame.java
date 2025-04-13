@@ -53,6 +53,7 @@ public class ViewFuncionariosInternalFrame extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
         setTitle("Todos os Funcionários");
+        setToolTipText("Todos os Funcionários");
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel1.setText("TODOS OS FUNCIONÁRIOS");
