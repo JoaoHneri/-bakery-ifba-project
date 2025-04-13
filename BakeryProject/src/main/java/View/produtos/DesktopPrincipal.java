@@ -137,9 +137,9 @@ public class DesktopPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        CadastroProdutosInternalFrame cadastroProdutosInternalFrame = new CadastroProdutosInternalFrame();
-        principalDesktop.add(cadastroProdutosInternalFrame);
-        cadastroProdutosInternalFrame.setVisible(true);
+      GerenciadorDeProdutos gerenciadorDeProdutos = new GerenciadorDeProdutos();
+      principalDesktop.add(gerenciadorDeProdutos);
+      gerenciadorDeProdutos.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
