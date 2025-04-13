@@ -71,10 +71,15 @@ public class GerenciadorDeProdutos extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelaProdutos = new javax.swing.JTable();
         jLabel11 = new javax.swing.JLabel();
+        cancelarEdicao = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
+        setTitle("Gerenciador De Produtos");
+        setToolTipText("Gerenciador de Produtos");
+
+        jTabbedPane1.setToolTipText("Gerenciador De Produtos");
 
         jPanel3.setBackground(new java.awt.Color(0, 102, 102));
 
@@ -289,6 +294,13 @@ public class GerenciadorDeProdutos extends javax.swing.JInternalFrame {
 
         jLabel11.setText("Clique com o botão direito em algum item da tabela para abrir as opções");
 
+        cancelarEdicao.setText("Cancelar");
+        cancelarEdicao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelarEdicaoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -303,9 +315,14 @@ public class GerenciadorDeProdutos extends javax.swing.JInternalFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jScrollPane1)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(editarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(queryProdInput, javax.swing.GroupLayout.PREFERRED_SIZE, 723, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addGap(351, 351, 351)
+                                        .addComponent(jLabel10)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addComponent(jLabel8)
@@ -321,16 +338,12 @@ public class GerenciadorDeProdutos extends javax.swing.JInternalFrame {
                                     .addComponent(jLabel9))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(editCategoria)
-                                    .addComponent(editQuantidade)))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(queryProdInput, javax.swing.GroupLayout.PREFERRED_SIZE, 723, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addGap(351, 351, 351)
-                                        .addComponent(jLabel10)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(cancelarEdicao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(editarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(editCategoria)
+                                    .addComponent(editQuantidade))))
                         .addGap(27, 27, 27))))
         );
         jPanel2Layout.setVerticalGroup(
@@ -359,7 +372,9 @@ public class GerenciadorDeProdutos extends javax.swing.JInternalFrame {
                     .addComponent(jLabel9)
                     .addComponent(editCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(editarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(cancelarEdicao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(editarProduto, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE))
                 .addGap(20, 20, 20))
         );
 
@@ -437,8 +452,44 @@ public class GerenciadorDeProdutos extends javax.swing.JInternalFrame {
     private void cadastrarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarProdutoActionPerformed
         cadastrarProduto();
     }//GEN-LAST:event_cadastrarProdutoActionPerformed
-    
-    
+
+    private void cancelarEdicaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarEdicaoActionPerformed
+        limparCamposEdicao();
+    }//GEN-LAST:event_cancelarEdicaoActionPerformed
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton cadastrarProduto;
+    private javax.swing.JButton cancelarEdicao;
+    private javax.swing.JTextField categoriaProduto;
+    private javax.swing.JTextField editCategoria;
+    private javax.swing.JTextField editNome;
+    private javax.swing.JTextField editQuantidade;
+    private javax.swing.JTextField editValor;
+    private javax.swing.JButton editarProduto;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTextField nomeProduto;
+    private javax.swing.JTextField quantidadeProduto;
+    private javax.swing.JTextField queryProdInput;
+    private javax.swing.JTable tabelaProdutos;
+    private javax.swing.JTextField valorProduto;
+    // End of variables declaration//GEN-END:variables
+
     private void cadastrarProduto() {
         try {
             Produto produto = new Produto();
@@ -648,37 +699,4 @@ public class GerenciadorDeProdutos extends javax.swing.JInternalFrame {
         editValor.setText("");
         editCategoria.setText("");
     }
-
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton cadastrarProduto;
-    private javax.swing.JTextField categoriaProduto;
-    private javax.swing.JTextField editCategoria;
-    private javax.swing.JTextField editNome;
-    private javax.swing.JTextField editQuantidade;
-    private javax.swing.JTextField editValor;
-    private javax.swing.JButton editarProduto;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextField nomeProduto;
-    private javax.swing.JTextField quantidadeProduto;
-    private javax.swing.JTextField queryProdInput;
-    private javax.swing.JTable tabelaProdutos;
-    private javax.swing.JTextField valorProduto;
-    // End of variables declaration//GEN-END:variables
 }

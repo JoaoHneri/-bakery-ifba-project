@@ -90,7 +90,6 @@ public class FuncionarioDAO {
         }
     }
     
-    
     public Funcionario buscarPorId(Long id) {
         Connection con = Conexao.getConexao();
         PreparedStatement stmt = null;
@@ -169,4 +168,41 @@ public class FuncionarioDAO {
             Conexao.fecharConexao(con, stmt);
         }
     }
+    
+    public List<Funcionario> buscarPorNome(String nome) {
+        Connection con = Conexao.getConexao();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        List<Funcionario> funcionarios = new ArrayList<>();
+
+        try {
+            stmt = con.prepareStatement("SELECT * FROM Funcionario WHERE nome LIKE ?");
+            stmt.setString(1, "%" + nome + "%");
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Funcionario funcionario = new Funcionario(
+                    rs.getLong("id"),
+                    rs.getString("nome"),
+                    rs.getString("cpf"),
+                    rs.getDate("data_nascimento") != null ? rs.getDate("data_nascimento").toLocalDate() : null,
+                    rs.getString("endereco"),
+                    rs.getString("telefone"),
+                    rs.getString("email"),
+                    rs.getString("cargo"),
+                    rs.getString("departamento"),
+                    rs.getDouble("salario")
+                );
+                funcionarios.add(funcionario);
+            }
+
+            return funcionarios;
+
+        } catch (SQLException ex) {
+            throw new RuntimeException("Erro ao buscar funcionários por nome: " + ex.getMessage());
+        } finally {
+            Conexao.fecharConexao(con, stmt, rs);
+        }
+    }
+    
 }
