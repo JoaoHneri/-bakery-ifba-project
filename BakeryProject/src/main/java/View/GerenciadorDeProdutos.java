@@ -81,7 +81,6 @@ public class GerenciadorDeProdutos extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setIconifiable(true);
-        setMaximizable(true);
         setTitle("Gerenciador De Produtos");
         setToolTipText("Gerenciador de Produtos");
 

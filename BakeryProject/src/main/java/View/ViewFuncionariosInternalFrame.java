@@ -59,7 +59,6 @@ public class ViewFuncionariosInternalFrame extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setIconifiable(true);
-        setMaximizable(true);
         setTitle("Todos os Funcionários");
         setToolTipText("Todos os Funcionários");
 

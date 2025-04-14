@@ -50,7 +50,6 @@ public class RelatorioFrame extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setIconifiable(true);
-        setMaximizable(true);
         setTitle("Relatório de Vendas");
         setToolTipText("Relatório de Vendas");
 

@@ -163,8 +163,6 @@ public class GerenciadorDeFuncionarios extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setIconifiable(true);
-        setMaximizable(true);
-        setResizable(true);
         setTitle("Gerenciador De Funcionários");
         setToolTipText("Gerenciador De Funcionários");
 
