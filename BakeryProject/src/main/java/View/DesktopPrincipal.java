@@ -9,6 +9,7 @@ package View;
 /**
  *
  * @author joaoh
+ * Desktop principal onde outras janelas são criadas e renderizadas.
  */
 public class DesktopPrincipal extends javax.swing.JFrame {
 
