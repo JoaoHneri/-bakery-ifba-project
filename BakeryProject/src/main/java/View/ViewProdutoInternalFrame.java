@@ -161,7 +161,7 @@ public class ViewProdutoInternalFrame extends javax.swing.JInternalFrame {
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
     
-    private void abrirOpcoes() {
+    public void abrirOpcoes() {
         jTable1.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -175,7 +175,7 @@ public class ViewProdutoInternalFrame extends javax.swing.JInternalFrame {
         });
     }
     
-    private void mostrarPopupMenu(MouseEvent e) {
+    public void mostrarPopupMenu(MouseEvent e) {
         int row = jTable1.rowAtPoint(e.getPoint());
         if (row >= 0) {
             jTable1.setRowSelectionInterval(row, row); 
@@ -195,7 +195,7 @@ public class ViewProdutoInternalFrame extends javax.swing.JInternalFrame {
         }
     }
     
-    private void confirmarDelecao(int rowIndex) {
+    public void confirmarDelecao(int rowIndex) {
         Long id = (Long) jTable1.getValueAt(rowIndex, 0);
         String nome = (String) jTable1.getValueAt(rowIndex, 1);
 
@@ -209,7 +209,7 @@ public class ViewProdutoInternalFrame extends javax.swing.JInternalFrame {
         }
     }
     
-    private void deletarProduto(Long id, int rowIndex) {
+    public void deletarProduto(Long id, int rowIndex) {
         try {
             ProdutoDAO dao = new ProdutoDAO();
             ((DefaultTableModel)jTable1.getModel()).removeRow(rowIndex);
@@ -226,7 +226,7 @@ public class ViewProdutoInternalFrame extends javax.swing.JInternalFrame {
         }
     }
 
-    private void abrirDetalhesProduto(int rowIndex) {
+    public void abrirDetalhesProduto(int rowIndex) {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         Long id = (Long) model.getValueAt(rowIndex, 0);
         try {

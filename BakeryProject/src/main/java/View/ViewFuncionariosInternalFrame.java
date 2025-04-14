@@ -128,7 +128,7 @@ public class ViewFuncionariosInternalFrame extends javax.swing.JInternalFrame {
         popularJtable();
     }//GEN-LAST:event_jButton1ActionPerformed
     
-    private void abrirOpcoes() {
+    public void abrirOpcoes() {
         jTable1.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -142,7 +142,7 @@ public class ViewFuncionariosInternalFrame extends javax.swing.JInternalFrame {
         });
     }
     
-    private void mostrarPopupMenu(MouseEvent e) {
+    public void mostrarPopupMenu(MouseEvent e) {
         int row = jTable1.rowAtPoint(e.getPoint());
         if (row >= 0) {
             jTable1.setRowSelectionInterval(row, row);
@@ -162,7 +162,7 @@ public class ViewFuncionariosInternalFrame extends javax.swing.JInternalFrame {
         }
     }
     
-    private void confirmarDelecao(int rowIndex) {
+    public void confirmarDelecao(int rowIndex) {
         Long id = (Long) jTable1.getValueAt(rowIndex, 0);
         String nome = (String) jTable1.getValueAt(rowIndex, 1);
 
@@ -176,7 +176,7 @@ public class ViewFuncionariosInternalFrame extends javax.swing.JInternalFrame {
         }
     }
 
-    private void deletarFuncionario(Long id, int rowIndex) {
+    public void deletarFuncionario(Long id, int rowIndex) {
         try {
             FuncionarioDAO dao = new FuncionarioDAO();
             ((DefaultTableModel)jTable1.getModel()).removeRow(rowIndex);
@@ -192,7 +192,8 @@ public class ViewFuncionariosInternalFrame extends javax.swing.JInternalFrame {
                 JOptionPane.ERROR_MESSAGE);
         }
     }
-    private void abrirDetalhesFuncionario(int rowIndex) {
+    
+    public void abrirDetalhesFuncionario(int rowIndex) {
         // Obtém o modelo da tabela
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
 

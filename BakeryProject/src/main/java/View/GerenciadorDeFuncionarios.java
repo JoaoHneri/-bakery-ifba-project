@@ -1375,7 +1375,8 @@ public class GerenciadorDeFuncionarios extends javax.swing.JInternalFrame {
     private javax.swing.JTextField telefoneFuncionarioEdit;
     private javax.swing.JTextField telefoneFuncionarioEdit1;
     // End of variables declaration//GEN-END:variables
-        private void cadastrarFuncionario() {
+        
+    public void cadastrarFuncionario() {
         try {
             LocalDate dataNascimento;
             try {
@@ -1425,7 +1426,7 @@ public class GerenciadorDeFuncionarios extends javax.swing.JInternalFrame {
         }
     }
 
-    private void limparCamposFuncionario() {
+    public void limparCamposFuncionario() {
         nomeFuncionario.setText("");
         cpfFuncionario.setText("");
         jDataText.setText("");
@@ -1438,7 +1439,7 @@ public class GerenciadorDeFuncionarios extends javax.swing.JInternalFrame {
     }
     
     
-    private void abrirOpcoes() {
+    public void abrirOpcoes() {
         tabelaFuncionarios.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -1452,7 +1453,7 @@ public class GerenciadorDeFuncionarios extends javax.swing.JInternalFrame {
         });
     }
     
-    private void mostrarPopupMenu(MouseEvent e) {
+    public void mostrarPopupMenu(MouseEvent e) {
         int row = tabelaFuncionarios.rowAtPoint(e.getPoint());
         if (row >= 0) {
             tabelaFuncionarios.setRowSelectionInterval(row, row);
@@ -1476,7 +1477,7 @@ public class GerenciadorDeFuncionarios extends javax.swing.JInternalFrame {
         }
     }
     
-    private void confirmarDelecao(int rowIndex) {
+    public void confirmarDelecao(int rowIndex) {
         Long id = (Long) tabelaFuncionarios.getValueAt(rowIndex, 0);
         String nome = (String) tabelaFuncionarios.getValueAt(rowIndex, 1);
 
@@ -1490,7 +1491,7 @@ public class GerenciadorDeFuncionarios extends javax.swing.JInternalFrame {
         }
     }
 
-    private void deletarFuncionario(Long id, int rowIndex) {
+    public void deletarFuncionario(Long id, int rowIndex) {
         try {
             FuncionarioDAO dao = new FuncionarioDAO();
             ((DefaultTableModel)tabelaFuncionarios.getModel()).removeRow(rowIndex);
@@ -1506,7 +1507,8 @@ public class GerenciadorDeFuncionarios extends javax.swing.JInternalFrame {
                 JOptionPane.ERROR_MESSAGE);
         }
     }
-    private void abrirDetalhesFuncionario(int rowIndex) {
+    
+    public void abrirDetalhesFuncionario(int rowIndex) {
         // Obtém o modelo da tabela
         DefaultTableModel model = (DefaultTableModel) tabelaFuncionarios.getModel();
 
@@ -1599,7 +1601,7 @@ public class GerenciadorDeFuncionarios extends javax.swing.JInternalFrame {
         }
     }
     
-    private void preencherCamposEdicao(int rowIndex) {
+    public void preencherCamposEdicao(int rowIndex) {
         DefaultTableModel model = (DefaultTableModel) tabelaFuncionarios.getModel();
         funcionarioEditandoId = (Long) model.getValueAt(rowIndex, 0);
 
@@ -1626,7 +1628,7 @@ public class GerenciadorDeFuncionarios extends javax.swing.JInternalFrame {
         jTabbedPane1.setSelectedIndex(1);
     }
     
-    private void editarFuncionario() {
+    public void editarFuncionario() {
         if (funcionarioEditandoId == null) {
             JOptionPane.showMessageDialog(this, "Nenhum funcionário selecionado para edição", "Aviso", JOptionPane.WARNING_MESSAGE);
             return;
@@ -1673,7 +1675,7 @@ public class GerenciadorDeFuncionarios extends javax.swing.JInternalFrame {
         }
     }
     
-    private void limparCamposEdicao() {
+    public void limparCamposEdicao() {
         funcionarioEditandoId = null;
         nomeFuncionarioEdit.setText("");
         cpfFuncionarioEdit.setText("");

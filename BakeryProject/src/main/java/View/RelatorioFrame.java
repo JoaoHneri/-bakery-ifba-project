@@ -139,13 +139,13 @@ public class RelatorioFrame extends javax.swing.JInternalFrame {
     private javax.swing.JLabel vendasField;
     // End of variables declaration//GEN-END:variables
 
-     private void atualizarRelatorio() {
+    public void atualizarRelatorio() {
         int mesSelecionado = jComboBox1.getSelectedIndex() + 1;
         int anoAtual = Year.now().getValue();
         carregarVendasDoMes(mesSelecionado, anoAtual);
     }
     
-    private void carregarVendasDoMes(int mes, int ano) {
+    public void carregarVendasDoMes(int mes, int ano) {
         List<Venda> vendas = vendaDAO.buscarVendasPorMes(mes, ano);
         DefaultTableModel model = (DefaultTableModel) tabelaVendas.getModel();
         model.setRowCount(0);

@@ -492,7 +492,7 @@ public class GerenciadorDeProdutos extends javax.swing.JInternalFrame {
     private javax.swing.JTextField valorProduto;
     // End of variables declaration//GEN-END:variables
 
-    private void cadastrarProduto() {
+    public void cadastrarProduto() {
         try {
             Produto produto = new Produto();
             produto.setNome(nomeProduto.getText());
@@ -518,7 +518,7 @@ public class GerenciadorDeProdutos extends javax.swing.JInternalFrame {
         }
     }
 
-    private void limparCampos() {
+    public void limparCampos() {
         nomeProduto.setText("");
         quantidadeProduto.setText("");
         valorProduto.setText("");
@@ -526,7 +526,7 @@ public class GerenciadorDeProdutos extends javax.swing.JInternalFrame {
     }
     
     
-     public void popularProdutos(List<Produto> produtos) {
+    public void popularProdutos(List<Produto> produtos) {
         try {
             DefaultTableModel modelo = (DefaultTableModel) tabelaProdutos.getModel();
 
@@ -562,7 +562,7 @@ public class GerenciadorDeProdutos extends javax.swing.JInternalFrame {
     }
     
     
-    private void abrirOpcoes() {
+    public void abrirOpcoes() {
         tabelaProdutos.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -576,7 +576,7 @@ public class GerenciadorDeProdutos extends javax.swing.JInternalFrame {
         });
     }
     
-    private void mostrarPopupMenu(MouseEvent e) {
+    public void mostrarPopupMenu(MouseEvent e) {
         int row = tabelaProdutos.rowAtPoint(e.getPoint());
         if (row >= 0) {
             tabelaProdutos.setRowSelectionInterval(row, row); 
@@ -600,7 +600,7 @@ public class GerenciadorDeProdutos extends javax.swing.JInternalFrame {
         }
     }
     
-    private void confirmarDelecao(int rowIndex) {
+    public void confirmarDelecao(int rowIndex) {
         Long id = (Long) tabelaProdutos.getValueAt(rowIndex, 0);
         String nome = (String) tabelaProdutos.getValueAt(rowIndex, 1);
 
@@ -614,7 +614,7 @@ public class GerenciadorDeProdutos extends javax.swing.JInternalFrame {
         }
     }
     
-    private void deletarProduto(Long id, int rowIndex) {
+    public void deletarProduto(Long id, int rowIndex) {
         try {
             ProdutoDAO dao = new ProdutoDAO();
             ((DefaultTableModel)tabelaProdutos.getModel()).removeRow(rowIndex);
@@ -631,7 +631,7 @@ public class GerenciadorDeProdutos extends javax.swing.JInternalFrame {
         }
     }
 
-    private void abrirDetalhesProduto(int rowIndex) {
+    public void abrirDetalhesProduto(int rowIndex) {
         DefaultTableModel model = (DefaultTableModel) tabelaProdutos.getModel();
         Long id = (Long) model.getValueAt(rowIndex, 0);
         try {
@@ -655,8 +655,7 @@ public class GerenciadorDeProdutos extends javax.swing.JInternalFrame {
         }
     }
     
-    
-    private void preencherCamposEdicao(int rowIndex) {
+    public void preencherCamposEdicao(int rowIndex) {
         DefaultTableModel model = (DefaultTableModel) tabelaProdutos.getModel();
         produtoEditandoId = (Long) model.getValueAt(rowIndex, 0);
         editNome.setText((String) model.getValueAt(rowIndex, 1));
@@ -667,7 +666,7 @@ public class GerenciadorDeProdutos extends javax.swing.JInternalFrame {
         jTabbedPane1.setSelectedIndex(1);
     }
     
-    private void editarProduto(){
+    public void editarProduto(){
         if (produtoEditandoId == null) {
             JOptionPane.showMessageDialog(this, "Nenhum produto selecionado para edição", "Aviso", JOptionPane.WARNING_MESSAGE);
             return;
@@ -694,7 +693,7 @@ public class GerenciadorDeProdutos extends javax.swing.JInternalFrame {
         }
     }
     
-    private void limparCamposEdicao() {
+    public void limparCamposEdicao() {
         produtoEditandoId = null;
         editNome.setText("");
         editQuantidade.setText("");

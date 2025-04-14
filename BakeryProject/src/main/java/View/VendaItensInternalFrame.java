@@ -334,6 +334,7 @@ public class VendaItensInternalFrame extends javax.swing.JInternalFrame {
     private void valorEntregueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_valorEntregueActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_valorEntregueActionPerformed
+    
     public void verificarValoresParaTroco(){
         valorEntregue.getDocument().addDocumentListener(new DocumentListener() {
             @Override
@@ -352,6 +353,7 @@ public class VendaItensInternalFrame extends javax.swing.JInternalFrame {
             }
         });
     }
+    
     public void popularProdutos(List<Produto> produtos) {
         try {
             DefaultTableModel modelo = (DefaultTableModel) produtosTable.getModel();
@@ -507,7 +509,7 @@ public class VendaItensInternalFrame extends javax.swing.JInternalFrame {
         }
     }
     
-    private void limparCarrinho() {                                               
+    public void limparCarrinho() {                                               
         // Verifica se há itens no carrinho
         if (itensSelecionados.isEmpty()) {
             JOptionPane.showMessageDialog(this, 
@@ -646,7 +648,7 @@ public class VendaItensInternalFrame extends javax.swing.JInternalFrame {
         }
     }
     
-    private void calcularTroco() {
+    public void calcularTroco() {
         try {
             // Calcula o valor total dos itens
             double total = itensSelecionados.stream()
