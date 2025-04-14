@@ -19,7 +19,19 @@ import model.Produto;
  *
  * @author joaoh
  */
+/**
+ * Classe de Acesso a Dados (DAO) para a entidade Venda.
+ * Responsável por todas as operações de banco de dados relacionadas a vendas.
+ */
 public class VendaDAO {
+    
+    /**
+     * Salva uma nova venda no banco de dados e retorna seu ID gerado.
+     * 
+     * @param venda O objeto Venda contendo os dados da venda a ser registrada
+     * @return O ID gerado para a nova venda
+     * @throws Exception Se ocorrer um erro durante a operação ou se nenhum ID for gerado
+     */
     public Long salvarVenda(Venda venda) throws Exception {
         String sql = "INSERT INTO venda (idProduto, quantidade, valor, data_de_venda) VALUES (?, ?, ?, ?)";
 
@@ -54,6 +66,14 @@ public class VendaDAO {
         }   
     }
     
+    /**
+     * Busca todas as vendas realizadas em um mês e ano específicos.
+     * 
+     * @param mes O mês (1-12) para filtrar as vendas
+     * @param ano O ano para filtrar as vendas
+     * @return Lista de vendas encontradas para o período, ordenadas por data (mais recente primeiro)
+     * @throws RuntimeException Se ocorrer um erro durante a consulta ao banco de dados
+     */
     public List<Venda> buscarVendasPorMes(int mes, int ano) {
         Connection con = Conexao.getConexao();
         PreparedStatement stmt = null;

@@ -9,16 +9,27 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-/**
- *
- * @author joaoh
- */
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *
+ * @author joaoh
+ */
+
+/**
+ * Classe que irá conter todas as funções que envolvem Funcionários e sua relação com o banco de dados.
+ * Permite cadastrar, editar, visualizar e excluir funcionários.
+ */
 public class FuncionarioDAO {
     
+    /**
+     * Insere um novo funcionário no banco de dados.
+     * 
+     * @param funcionario O objeto Funcionario contendo os dados a serem inseridos
+     * @throws RuntimeException Se ocorrer um erro durante a inserção no banco de dados
+     */
     public void incluir(Funcionario funcionario) {
         Connection con = Conexao.getConexao();
         PreparedStatement stmt = null;
@@ -53,7 +64,12 @@ public class FuncionarioDAO {
         }
     }
     
-    
+    /**
+     * Recupera todos os funcionários cadastrados no banco de dados.
+     * 
+     * @return Lista de Funcionario contendo todos os funcionários cadastrados
+     * @throws RuntimeException Se ocorrer um erro durante a consulta ao banco de dados
+     */
     public List<Funcionario> buscarTodos() {
         Connection con = Conexao.getConexao();
         PreparedStatement stmt = null;
@@ -90,6 +106,13 @@ public class FuncionarioDAO {
         }
     }
     
+    /**
+     * Busca um funcionário específico pelo seu ID.
+     * 
+     * @param id O ID do funcionário a ser buscado
+     * @return O objeto Funcionario correspondente ao ID fornecido
+     * @throws RuntimeException Se o funcionário não for encontrado ou ocorrer um erro na consulta
+     */
     public Funcionario buscarPorId(Long id) {
         Connection con = Conexao.getConexao();
         PreparedStatement stmt = null;
@@ -124,6 +147,12 @@ public class FuncionarioDAO {
         }
     }
     
+    /**
+     * Atualiza os dados de um funcionário existente no banco de dados.
+     * 
+     * @param funcionario O objeto Funcionario com os dados atualizados
+     * @throws RuntimeException Se ocorrer um erro durante a atualização no banco de dados
+     */
     public void atualizar(Funcionario funcionario) {
         Connection con = Conexao.getConexao();
         PreparedStatement stmt = null;
@@ -154,6 +183,13 @@ public class FuncionarioDAO {
         }
     }
     
+    
+    /**
+     * Remove um funcionário do banco de dados.
+     * 
+     * @param id O ID do funcionário a ser removido
+     * @throws RuntimeException Se ocorrer um erro durante a exclusão no banco de dados
+     */
     public void excluir(Long id) {
         Connection con = Conexao.getConexao();
         PreparedStatement stmt = null;
@@ -169,6 +205,13 @@ public class FuncionarioDAO {
         }
     }
     
+    /**
+     * Busca funcionários cujos nomes correspondam ao padrão fornecido.
+     * 
+     * @param nome O nome ou parte do nome a ser buscado (usa LIKE '%nome%')
+     * @return Lista de Funcionario contendo os resultados da busca
+     * @throws RuntimeException Se ocorrer um erro durante a consulta ao banco de dados
+     */
     public List<Funcionario> buscarPorNome(String nome) {
         Connection con = Conexao.getConexao();
         PreparedStatement stmt = null;

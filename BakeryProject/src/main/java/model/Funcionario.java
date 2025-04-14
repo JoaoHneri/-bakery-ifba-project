@@ -12,6 +12,10 @@ import java.time.LocalDate;
  * @author joaoh
  * Classe Funcionário
  */
+
+/**
+ * Classe Funcionário
+ */
 public class Funcionario {
     private Long id;
     private String nome;
