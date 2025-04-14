@@ -15,9 +15,16 @@ import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.swing.table.DefaultTableModel;
 import model.Produto;
+
 /**
  *
  * @author joaoh
+ */
+
+ /**
+ * Interface gráfica para visualização e gerenciamento de produtos no sistema.
+ * Este frame interno permite aos usuários visualizar todos os produtos cadastrados,
+ * atualizar a lista, ver detalhes de produtos específicos e excluir registros.
  */
 public class ViewProdutoInternalFrame extends javax.swing.JInternalFrame {
 
@@ -31,9 +38,6 @@ public class ViewProdutoInternalFrame extends javax.swing.JInternalFrame {
 
     }
     
-    
-    
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -126,6 +130,10 @@ public class ViewProdutoInternalFrame extends javax.swing.JInternalFrame {
         popularJtable();
     }//GEN-LAST:event_jButton1ActionPerformed
     
+    /**
+    * Popula a tabela com todos os produtos cadastrados no banco de dados.
+    * Este método é chamado na inicialização do frame e quando o botão Atualizar é clicado.
+    */
     public void popularJtable() {
     try {
         ProdutoDAO produtoDAO = new ProdutoDAO();
@@ -161,6 +169,10 @@ public class ViewProdutoInternalFrame extends javax.swing.JInternalFrame {
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
     
+    /**
+    * Configura o listener de mouse para a tabela de produtos,
+    * permitindo a exibição de um menu de contexto ao clicar com o botão direito.
+    */
     public void abrirOpcoes() {
         jTable1.addMouseListener(new MouseAdapter() {
             @Override
@@ -175,6 +187,13 @@ public class ViewProdutoInternalFrame extends javax.swing.JInternalFrame {
         });
     }
     
+    
+    /**
+    * Exibe um menu de contexto com opções para o produto selecionado.
+    * As opções incluem ver detalhes e deletar o produto.
+    * 
+    * @param e O evento de mouse que acionou o menu
+    */
     public void mostrarPopupMenu(MouseEvent e) {
         int row = jTable1.rowAtPoint(e.getPoint());
         if (row >= 0) {
@@ -195,6 +214,11 @@ public class ViewProdutoInternalFrame extends javax.swing.JInternalFrame {
         }
     }
     
+    /**
+    * Exibe uma caixa de diálogo para confirmar a exclusão do produto selecionado.
+    * 
+    * @param rowIndex O índice da linha selecionada na tabela
+    */
     public void confirmarDelecao(int rowIndex) {
         Long id = (Long) jTable1.getValueAt(rowIndex, 0);
         String nome = (String) jTable1.getValueAt(rowIndex, 1);
@@ -209,6 +233,13 @@ public class ViewProdutoInternalFrame extends javax.swing.JInternalFrame {
         }
     }
     
+    
+    /**
+     * Exclui um produto do banco de dados e remove a linha correspondente da tabela.
+     * 
+     * @param id O ID do produto a ser excluído
+     * @param rowIndex O índice da linha na tabela a ser removida
+     */
     public void deletarProduto(Long id, int rowIndex) {
         try {
             ProdutoDAO dao = new ProdutoDAO();
@@ -226,6 +257,11 @@ public class ViewProdutoInternalFrame extends javax.swing.JInternalFrame {
         }
     }
 
+    /**
+    * Exibe os detalhes completos do produto selecionado em uma caixa de diálogo.
+    * 
+    * @param rowIndex O índice da linha selecionada na tabela
+    */
     public void abrirDetalhesProduto(int rowIndex) {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         Long id = (Long) model.getValueAt(rowIndex, 0);

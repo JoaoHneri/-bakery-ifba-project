@@ -22,6 +22,10 @@ import model.Produto;
  *
  * @author joaoh
  */
+/**
+ * Classe que representa uma interface gráfica para gerenciar Produtos.
+ * Permite cadastrar, editar, visualizar e excluir funcionários através de uma interface.
+ */
 public class GerenciadorDeProdutos extends javax.swing.JInternalFrame {
     
     private Long produtoEditandoId;
@@ -491,7 +495,11 @@ public class GerenciadorDeProdutos extends javax.swing.JInternalFrame {
     private javax.swing.JTable tabelaProdutos;
     private javax.swing.JTextField valorProduto;
     // End of variables declaration//GEN-END:variables
-
+    
+    /**
+     * Cadastra um novo Produto com os dados preenchidos nos campos do formulário.
+     * Valida os dados antes de enviar para o banco de dados e exibe mensagens de sucesso/erro.
+     */
     public void cadastrarProduto() {
         try {
             Produto produto = new Produto();
@@ -517,7 +525,10 @@ public class GerenciadorDeProdutos extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Erro ao cadastrar: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
-
+    
+    /**
+     * Limpa todos os campos do formulário de cadastro de produtos.
+     */
     public void limparCampos() {
         nomeProduto.setText("");
         quantidadeProduto.setText("");
@@ -525,7 +536,9 @@ public class GerenciadorDeProdutos extends javax.swing.JInternalFrame {
         categoriaProduto.setText("");
     }
     
-    
+    /**
+     * Popula a tabela de Produtos com os produtos do banco de dados.
+     */
     public void popularProdutos(List<Produto> produtos) {
         try {
             DefaultTableModel modelo = (DefaultTableModel) tabelaProdutos.getModel();
@@ -549,7 +562,10 @@ public class GerenciadorDeProdutos extends javax.swing.JInternalFrame {
                 JOptionPane.ERROR_MESSAGE);
         }
     }
-     
+    
+    /**
+     * Função para buscar todos os produtos.
+     */
     public void buscarTodosProdutos(){
         ProdutoDAO produtoDAO = new ProdutoDAO();
         List<Produto> produtos;
@@ -561,7 +577,9 @@ public class GerenciadorDeProdutos extends javax.swing.JInternalFrame {
         }
     }
     
-    
+    /**
+     * Configura os listeners para abrir o menu de opções ao clicar com o botão direito na tabela.
+     */
     public void abrirOpcoes() {
         tabelaProdutos.addMouseListener(new MouseAdapter() {
             @Override
@@ -576,6 +594,10 @@ public class GerenciadorDeProdutos extends javax.swing.JInternalFrame {
         });
     }
     
+    /**
+     * Exibe um menu popup com opções para o produto selecionado na tabela.
+     * @param e O evento de mouse que disparou a abertura do popup
+     */
     public void mostrarPopupMenu(MouseEvent e) {
         int row = tabelaProdutos.rowAtPoint(e.getPoint());
         if (row >= 0) {
@@ -600,6 +622,10 @@ public class GerenciadorDeProdutos extends javax.swing.JInternalFrame {
         }
     }
     
+    /**
+     * Solicita confirmação antes de deletar um produto.
+     * @param rowIndex O índice da linha do produto na tabela
+     */
     public void confirmarDelecao(int rowIndex) {
         Long id = (Long) tabelaProdutos.getValueAt(rowIndex, 0);
         String nome = (String) tabelaProdutos.getValueAt(rowIndex, 1);
@@ -614,6 +640,11 @@ public class GerenciadorDeProdutos extends javax.swing.JInternalFrame {
         }
     }
     
+    /**
+     * Remove um produto do banco de dados.
+     * @param id O ID do Produto a ser removido
+     * @param rowIndex O índice da linha na tabela
+     */
     public void deletarProduto(Long id, int rowIndex) {
         try {
             ProdutoDAO dao = new ProdutoDAO();
@@ -630,7 +661,11 @@ public class GerenciadorDeProdutos extends javax.swing.JInternalFrame {
                 JOptionPane.ERROR_MESSAGE);
         }
     }
-
+    
+    /**
+     * Exibe os detalhes completos de um produto em uma caixa de diálogo.
+     * @param rowIndex O índice da linha do produto na tabela
+     */
     public void abrirDetalhesProduto(int rowIndex) {
         DefaultTableModel model = (DefaultTableModel) tabelaProdutos.getModel();
         Long id = (Long) model.getValueAt(rowIndex, 0);
@@ -655,6 +690,9 @@ public class GerenciadorDeProdutos extends javax.swing.JInternalFrame {
         }
     }
     
+    /**
+     * Preenche os campos de edição com os dados do Produto.
+     */
     public void preencherCamposEdicao(int rowIndex) {
         DefaultTableModel model = (DefaultTableModel) tabelaProdutos.getModel();
         produtoEditandoId = (Long) model.getValueAt(rowIndex, 0);
@@ -666,6 +704,9 @@ public class GerenciadorDeProdutos extends javax.swing.JInternalFrame {
         jTabbedPane1.setSelectedIndex(1);
     }
     
+    /**
+     * Atualiza os dados de um produto existente no banco de dados.
+     */
     public void editarProduto(){
         if (produtoEditandoId == null) {
             JOptionPane.showMessageDialog(this, "Nenhum produto selecionado para edição", "Aviso", JOptionPane.WARNING_MESSAGE);
@@ -693,6 +734,9 @@ public class GerenciadorDeProdutos extends javax.swing.JInternalFrame {
         }
     }
     
+    /**
+     * Limpa os Campos de Edição.
+     */
     public void limparCamposEdicao() {
         produtoEditandoId = null;
         editNome.setText("");

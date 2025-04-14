@@ -9,6 +9,7 @@ import java.time.LocalDate;
 /**
  *
  * @author joaoh
+ * Classe Pessoa
  */
 public class Pessoa {
     private Long id;

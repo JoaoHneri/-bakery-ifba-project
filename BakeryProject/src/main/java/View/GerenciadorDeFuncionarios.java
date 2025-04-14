@@ -27,6 +27,10 @@ import model.Funcionario;
  *
  * @author joaoh
  */
+/**
+ * Classe que representa uma interface gráfica para gerenciar funcionários.
+ * Permite cadastrar, editar, visualizar e excluir funcionários através de uma interface.
+ */
 public class GerenciadorDeFuncionarios extends javax.swing.JInternalFrame {
 
     /**
@@ -1375,7 +1379,11 @@ public class GerenciadorDeFuncionarios extends javax.swing.JInternalFrame {
     private javax.swing.JTextField telefoneFuncionarioEdit;
     private javax.swing.JTextField telefoneFuncionarioEdit1;
     // End of variables declaration//GEN-END:variables
-        
+    
+    /**
+     * Cadastra um novo funcionário com os dados preenchidos nos campos do formulário.
+     * Valida os dados antes de enviar para o banco de dados e exibe mensagens de sucesso/erro.
+     */
     public void cadastrarFuncionario() {
         try {
             LocalDate dataNascimento;
@@ -1425,7 +1433,10 @@ public class GerenciadorDeFuncionarios extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Erro ao cadastrar funcionário: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
-
+    
+    /**
+     * Limpa todos os campos do formulário de cadastro de funcionários.
+     */
     public void limparCamposFuncionario() {
         nomeFuncionario.setText("");
         cpfFuncionario.setText("");
@@ -1438,7 +1449,9 @@ public class GerenciadorDeFuncionarios extends javax.swing.JInternalFrame {
         salarioFuncionario.setText("");
     }
     
-    
+    /**
+     * Configura os listeners para abrir o menu de opções ao clicar com o botão direito na tabela.
+     */
     public void abrirOpcoes() {
         tabelaFuncionarios.addMouseListener(new MouseAdapter() {
             @Override
@@ -1453,6 +1466,10 @@ public class GerenciadorDeFuncionarios extends javax.swing.JInternalFrame {
         });
     }
     
+    /**
+     * Exibe um menu popup com opções para o funcionário selecionado na tabela.
+     * @param e O evento de mouse que disparou a abertura do popup
+     */
     public void mostrarPopupMenu(MouseEvent e) {
         int row = tabelaFuncionarios.rowAtPoint(e.getPoint());
         if (row >= 0) {
@@ -1477,6 +1494,10 @@ public class GerenciadorDeFuncionarios extends javax.swing.JInternalFrame {
         }
     }
     
+    /**
+     * Solicita confirmação antes de deletar um funcionário.
+     * @param rowIndex O índice da linha do funcionário na tabela
+     */
     public void confirmarDelecao(int rowIndex) {
         Long id = (Long) tabelaFuncionarios.getValueAt(rowIndex, 0);
         String nome = (String) tabelaFuncionarios.getValueAt(rowIndex, 1);
@@ -1490,7 +1511,12 @@ public class GerenciadorDeFuncionarios extends javax.swing.JInternalFrame {
             deletarFuncionario(id, rowIndex);
         }
     }
-
+    
+    /**
+     * Remove um funcionário do banco de dados.
+     * @param id O ID do funcionário a ser removido
+     * @param rowIndex O índice da linha na tabela
+     */
     public void deletarFuncionario(Long id, int rowIndex) {
         try {
             FuncionarioDAO dao = new FuncionarioDAO();
@@ -1508,6 +1534,10 @@ public class GerenciadorDeFuncionarios extends javax.swing.JInternalFrame {
         }
     }
     
+    /**
+     * Exibe os detalhes completos de um funcionário em uma caixa de diálogo.
+     * @param rowIndex O índice da linha do funcionário na tabela
+     */
     public void abrirDetalhesFuncionario(int rowIndex) {
         // Obtém o modelo da tabela
         DefaultTableModel model = (DefaultTableModel) tabelaFuncionarios.getModel();
@@ -1539,6 +1569,9 @@ public class GerenciadorDeFuncionarios extends javax.swing.JInternalFrame {
         }
     }
     
+    /**
+     * Carrega todos os funcionários do banco de dados e os exibe na tabela.
+     */
     public void popularFuncionarios() {
         try {
             FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
@@ -1571,6 +1604,10 @@ public class GerenciadorDeFuncionarios extends javax.swing.JInternalFrame {
         }
     }
     
+    /**
+     * Filtra e exibe funcionários com base em um critério de busca.
+     * @param funcionarios Lista de funcionários a serem exibidos
+     */
     public void popularProdutosPorNome(List<Funcionario> funcionarios) {
         try {
             
@@ -1601,6 +1638,10 @@ public class GerenciadorDeFuncionarios extends javax.swing.JInternalFrame {
         }
     }
     
+    /**
+     * Preenche os campos de edição com os dados do funcionário selecionado.
+     * @param rowIndex O índice da linha do funcionário na tabela
+     */
     public void preencherCamposEdicao(int rowIndex) {
         DefaultTableModel model = (DefaultTableModel) tabelaFuncionarios.getModel();
         funcionarioEditandoId = (Long) model.getValueAt(rowIndex, 0);
@@ -1628,6 +1669,9 @@ public class GerenciadorDeFuncionarios extends javax.swing.JInternalFrame {
         jTabbedPane1.setSelectedIndex(1);
     }
     
+    /**
+     * Atualiza os dados de um funcionário existente no banco de dados.
+     */
     public void editarFuncionario() {
         if (funcionarioEditandoId == null) {
             JOptionPane.showMessageDialog(this, "Nenhum funcionário selecionado para edição", "Aviso", JOptionPane.WARNING_MESSAGE);
@@ -1675,6 +1719,9 @@ public class GerenciadorDeFuncionarios extends javax.swing.JInternalFrame {
         }
     }
     
+    /**
+     * Limpa todos os campos do formulário de edição de funcionários.
+     */
     public void limparCamposEdicao() {
         funcionarioEditandoId = null;
         nomeFuncionarioEdit.setText("");
@@ -1688,4 +1735,5 @@ public class GerenciadorDeFuncionarios extends javax.swing.JInternalFrame {
         departamentoFuncionarioEdit.setText("");
         salarioFuncionarioEdit.setText("");
     }
+
 }

@@ -7,6 +7,7 @@ package model;
 /**
  *
  * @author Pc
+ * Classe Produto
  */
 
 public class Produto {

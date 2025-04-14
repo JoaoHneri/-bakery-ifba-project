@@ -21,9 +21,16 @@ import javax.swing.table.DefaultTableModel;
 import model.ItemPedido;
 import model.Produto;
 import model.Venda;
+
 /**
  *
  * @author joaoh
+ */
+
+/**
+ * Interface gráfica para gerenciamento de transações de vendas no sistema.
+ * Este frame interno permite aos usuários pesquisar produtos, adicioná-los ao carrinho de compras,
+ * gerenciar quantidades, calcular totais e trocos, e finalizar transações de vendas.
  */
 public class VendaItensInternalFrame extends javax.swing.JInternalFrame {
 
@@ -31,6 +38,10 @@ public class VendaItensInternalFrame extends javax.swing.JInternalFrame {
      * Creates new form VendaItensInternalFrame
      */
     
+    /**
+    * Lista de itens selecionados na transação de venda atual.
+    * Esta coleção mantém todos os produtos que foram adicionados ao carrinho.
+    */
     private List<ItemPedido> itensSelecionados = new ArrayList<>();
     
     public VendaItensInternalFrame() {
@@ -335,6 +346,10 @@ public class VendaItensInternalFrame extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_valorEntregueActionPerformed
     
+    /**
+    * Configura um listener para o campo de valor entregue para calcular automaticamente o troco
+    * quando o valor for alterado pelo usuário.
+    */
     public void verificarValoresParaTroco(){
         valorEntregue.getDocument().addDocumentListener(new DocumentListener() {
             @Override
@@ -354,6 +369,11 @@ public class VendaItensInternalFrame extends javax.swing.JInternalFrame {
         });
     }
     
+    /**
+    * Popula a tabela de produtos com os dados fornecidos.
+    * 
+    * @param produtos Lista de produtos a serem exibidos na tabela
+    */
     public void popularProdutos(List<Produto> produtos) {
         try {
             DefaultTableModel modelo = (DefaultTableModel) produtosTable.getModel();
@@ -378,6 +398,10 @@ public class VendaItensInternalFrame extends javax.swing.JInternalFrame {
         }
     }
     
+    /**
+    * Atualiza a tabela de itens selecionados com os produtos no carrinho atual
+    * e recalcula o troco baseado no valor entregue.
+    */
     public void popularPedidos() {
         try {
             DefaultTableModel modelo = (DefaultTableModel) selecionadosTable.getModel();
@@ -402,6 +426,11 @@ public class VendaItensInternalFrame extends javax.swing.JInternalFrame {
         }
     }
     
+    /**
+    * Adiciona o produto selecionado ao carrinho de compras.
+    * Valida a quantidade solicitada contra o estoque disponível e
+    * calcula o valor total do item adicionado.
+    */
     public void adicionarItemPedido() {
         try {
             int linhaSelecionada = produtosTable.getSelectedRow();
@@ -473,6 +502,9 @@ public class VendaItensInternalFrame extends javax.swing.JInternalFrame {
         }
     }
     
+    /**
+    * Remove o item selecionado do carrinho de compras após confirmação do usuário.
+    */
     public void removerItensDaLista() {
         try {
             int linhaSelecionada = selecionadosTable.getSelectedRow();
@@ -509,6 +541,10 @@ public class VendaItensInternalFrame extends javax.swing.JInternalFrame {
         }
     }
     
+    /**
+    * Limpa todos os itens do carrinho de compras após confirmação do usuário.
+    * Exibe um resumo dos itens e valor total antes da remoção.
+    */
     public void limparCarrinho() {                                               
         // Verifica se há itens no carrinho
         if (itensSelecionados.isEmpty()) {
@@ -551,6 +587,11 @@ public class VendaItensInternalFrame extends javax.swing.JInternalFrame {
         }
     }
     
+    /**
+    * Finaliza a transação de venda, registrando-a no banco de dados e atualizando o estoque.
+    * Verifica se há itens no carrinho, solicita confirmação do usuário e processa a venda,
+    * atualizando a quantidade em estoque para cada produto vendido.
+    */
     public void concluirVenda() {                                              
         try {
             if (itensSelecionados.isEmpty()) {
@@ -637,6 +678,9 @@ public class VendaItensInternalFrame extends javax.swing.JInternalFrame {
         }
     }
     
+    /**
+    * Carrega todos os produtos disponíveis no banco de dados e os exibe na tabela de produtos.
+    */
     public void buscarTodosProdutos(){
         ProdutoDAO produtoDAO = new ProdutoDAO();
         List<Produto> produtos;
@@ -648,6 +692,10 @@ public class VendaItensInternalFrame extends javax.swing.JInternalFrame {
         }
     }
     
+    /**
+    * Calcula o troco baseado no valor total dos itens no carrinho e no valor entregue pelo cliente.
+    * Atualiza os labels de valor total e troco na interface.
+    */
     public void calcularTroco() {
         try {
             // Calcula o valor total dos itens

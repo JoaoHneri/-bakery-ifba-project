@@ -15,6 +15,11 @@ import model.Venda;
  *
  * @author joaoh
  */
+
+/**
+ * Classe que representa uma interface gráfica que demonstra o relatório mensal de vendas.
+ * Permite visualizar uma tabela com todas as vendas do mês escolhido.
+ */
 public class RelatorioFrame extends javax.swing.JInternalFrame {
 
     /**
@@ -138,13 +143,20 @@ public class RelatorioFrame extends javax.swing.JInternalFrame {
     private javax.swing.JTable tabelaVendas;
     private javax.swing.JLabel vendasField;
     // End of variables declaration//GEN-END:variables
+    
 
+    /**
+     * Função que captura o mês e chama a função de busca de vendas com o mês selecionado.
+     */
     public void atualizarRelatorio() {
         int mesSelecionado = jComboBox1.getSelectedIndex() + 1;
         int anoAtual = Year.now().getValue();
         carregarVendasDoMes(mesSelecionado, anoAtual);
     }
     
+    /**
+     * Função para buscar as vendas do mês selecionado.
+     */
     public void carregarVendasDoMes(int mes, int ano) {
         List<Venda> vendas = vendaDAO.buscarVendasPorMes(mes, ano);
         DefaultTableModel model = (DefaultTableModel) tabelaVendas.getModel();
