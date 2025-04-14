@@ -6,12 +6,11 @@
 'C:/Users/joaoh/.m2/repository/com/mysql/mysql-connector-j/8.0.33/mysql-connector-j-8.0.33.jar;C:/Users/joaoh/.m2/repository/com/google/protobuf/protobuf-java/3.21.9/protobuf-java-3.21.9.jar'
 -encoding
 'UTF-8'
--public
+-protected
 -source
 '22'
 -sourcepath
 'D:/BakeryProject/-bakery-ifba-project/BakeryProject/src/main/java'
--Xdoclint:none
 -author
 -bottom
 'Copyright &#169; 2025. All rights reserved.'
@@ -23,7 +22,6 @@
 'UTF-8'
 -doctitle
 'BakeryProject 1.0-SNAPSHOT API'
--nohelp
 -use
 -version
 -windowtitle
@@ -32,21 +30,22 @@ BakeryMain
 Conexao
 DAO
 model
-View.produtos
+View
 C:\Users\joaoh\.m2\repository\com\mysql\mysql-connector-j\8.0.33\mysql-connector-j-8.0.33.jar = 1743087076796
 C:\Users\joaoh\.m2\repository\com\google\protobuf\protobuf-java\3.21.9\protobuf-java-3.21.9.jar = 1743087076863
-D:\BakeryProject\-bakery-ifba-project\BakeryProject\src\main\java = 1744594534311
-D:\BakeryProject\-bakery-ifba-project\BakeryProject\target\reports\apidocs\allclasses-index.html = 1744594565786
-D:\BakeryProject\-bakery-ifba-project\BakeryProject\target\reports\apidocs\allpackages-index.html = 1744594565788
-D:\BakeryProject\-bakery-ifba-project\BakeryProject\target\reports\apidocs\element-list = 1744594565629
-D:\BakeryProject\-bakery-ifba-project\BakeryProject\target\reports\apidocs\index-all.html = 1744594565806
-D:\BakeryProject\-bakery-ifba-project\BakeryProject\target\reports\apidocs\index.html = 1744594565772
-D:\BakeryProject\-bakery-ifba-project\BakeryProject\target\reports\apidocs\member-search-index.js = 1744594565791
-D:\BakeryProject\-bakery-ifba-project\BakeryProject\target\reports\apidocs\module-search-index.js = 1744594565789
-D:\BakeryProject\-bakery-ifba-project\BakeryProject\target\reports\apidocs\overview-summary.html = 1744594565810
-D:\BakeryProject\-bakery-ifba-project\BakeryProject\target\reports\apidocs\overview-tree.html = 1744594565769
-D:\BakeryProject\-bakery-ifba-project\BakeryProject\target\reports\apidocs\package-search-index.js = 1744594565790
-D:\BakeryProject\-bakery-ifba-project\BakeryProject\target\reports\apidocs\search.html = 1744594565808
-D:\BakeryProject\-bakery-ifba-project\BakeryProject\target\reports\apidocs\serialized-form.html = 1744594565708
-D:\BakeryProject\-bakery-ifba-project\BakeryProject\target\reports\apidocs\tag-search-index.js = 1744594565792
-D:\BakeryProject\-bakery-ifba-project\BakeryProject\target\reports\apidocs\type-search-index.js = 1744594565790
+D:\BakeryProject\-bakery-ifba-project\BakeryProject\src\main\java = 1744595337213
+D:\BakeryProject\-bakery-ifba-project\BakeryProject\target\reports\apidocs\allclasses-index.html = 1744597973906
+D:\BakeryProject\-bakery-ifba-project\BakeryProject\target\reports\apidocs\allpackages-index.html = 1744597973909
+D:\BakeryProject\-bakery-ifba-project\BakeryProject\target\reports\apidocs\element-list = 1744597973704
+D:\BakeryProject\-bakery-ifba-project\BakeryProject\target\reports\apidocs\help-doc.html = 1744597973955
+D:\BakeryProject\-bakery-ifba-project\BakeryProject\target\reports\apidocs\index-all.html = 1744597973939
+D:\BakeryProject\-bakery-ifba-project\BakeryProject\target\reports\apidocs\index.html = 1744597973887
+D:\BakeryProject\-bakery-ifba-project\BakeryProject\target\reports\apidocs\member-search-index.js = 1744597973914
+D:\BakeryProject\-bakery-ifba-project\BakeryProject\target\reports\apidocs\module-search-index.js = 1744597973910
+D:\BakeryProject\-bakery-ifba-project\BakeryProject\target\reports\apidocs\overview-summary.html = 1744597973946
+D:\BakeryProject\-bakery-ifba-project\BakeryProject\target\reports\apidocs\overview-tree.html = 1744597973884
+D:\BakeryProject\-bakery-ifba-project\BakeryProject\target\reports\apidocs\package-search-index.js = 1744597973911
+D:\BakeryProject\-bakery-ifba-project\BakeryProject\target\reports\apidocs\search.html = 1744597973943
+D:\BakeryProject\-bakery-ifba-project\BakeryProject\target\reports\apidocs\serialized-form.html = 1744597973811
+D:\BakeryProject\-bakery-ifba-project\BakeryProject\target\reports\apidocs\tag-search-index.js = 1744597973915
+D:\BakeryProject\-bakery-ifba-project\BakeryProject\target\reports\apidocs\type-search-index.js = 1744597973912
