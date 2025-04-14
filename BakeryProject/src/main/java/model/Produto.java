@@ -10,6 +10,9 @@ package model;
  * Classe Produto
  */
 
+/**
+ * Classe Produto
+ */
 public class Produto {
     private Long id;
     private String nome;

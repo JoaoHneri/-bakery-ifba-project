@@ -11,6 +11,10 @@ import java.time.LocalDate;
  * @author joaoh
  * Classe Venda
  */
+
+/**
+ * Classe Venda
+ */
 public class Venda {
     private Long id;
     private Produto produto;

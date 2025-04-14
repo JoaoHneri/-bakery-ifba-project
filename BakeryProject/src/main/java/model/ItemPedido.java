@@ -8,6 +8,10 @@ package model;
  *
  * @author joaoh
  */
+
+/**
+ * Classe Item Pedido
+ */
 public class ItemPedido {
     private Long produtoId;
     private String produtoNome;

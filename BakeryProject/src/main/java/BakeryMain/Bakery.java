@@ -11,6 +11,7 @@ import model.Funcionario;
 import model.Produto;
 import DAO.ProdutoDAO;
 import DAO.VendaDAO;
+import View.DesktopPrincipal;
 import java.io.Console;
 import java.io.Console;
 import java.util.InputMismatchException;
@@ -27,20 +28,24 @@ public class Bakery {
  static Console console = System.console();
 
 public static void main(String[] args) throws Exception {
-        FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
-        VendaDAO vendaDAO = new VendaDAO();
-        ProdutoDAO produtoDAO = new ProdutoDAO();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        Produto prod = new Produto(3L, "Cacetinho", 2.0, 2, "Fermento");
-        Venda venda = new Venda(1L, prod, 2, 4.0, LocalDate.parse("2004-07-16"));
+    
+       DesktopPrincipal desktopPrincipal = new DesktopPrincipal();
+       desktopPrincipal.setVisible(true);
+       
+       /// FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+       /// VendaDAO vendaDAO = new VendaDAO();
+       /// ProdutoDAO produtoDAO = new ProdutoDAO();
+       /// DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+       /// Produto prod = new Produto(3L, "Cacetinho", 2.0, 2, "Fermento");
+       /// Venda venda = new Venda(1L, prod, 2, 4.0, LocalDate.parse("2004-07-16"));
         
-        try {
-        produtoDAO.buscarPorNome("Cac");
-        System.out.println("Incluido com sucesso!");
+       /// try {
+       /// produtoDAO.buscarPorNome("Cac");
+       /// System.out.println("Incluido com sucesso!");
             
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+       /// } catch (Exception e) {
+       ///     System.out.println(e.getMessage());
+       /// };
         
        /// Funcionario f1 = new Funcionario(null, "Joseph Borges Morais", "2485592984", LocalDate.parse("16/07/2004", formatter), "Feira de santana", "75983237776", "joaonsousa@gmail.com",
               ///  "Padeiro", "Padaria", 1500);
