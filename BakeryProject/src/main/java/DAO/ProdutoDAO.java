@@ -119,15 +119,31 @@ public class ProdutoDAO {
     }
 
     public void excluir(Long id) throws Exception {
+        try (var conexao = Conexao.getConexao()) {
+            conexao.setAutoCommit(false); // Inicia uma transação
 
-        var sql = "delete from produto where id = ?";
-        
-        try (var conexao = Conexao.getConexao();
-            var stmt = conexao.prepareStatement(sql)) {
-                stmt.setLong(1, id);
-                stmt.executeUpdate();
+            try {
+                // Primeiro exclui os registros da tabela venda que referenciam o produto
+                var sqlVendas = "delete from venda where idProduto = ?";
+                try (var stmtVendas = conexao.prepareStatement(sqlVendas)) {
+                    stmtVendas.setLong(1, id);
+                    stmtVendas.executeUpdate();
+                }
+
+                // Depois exclui o produto
+                var sqlProduto = "delete from produto where id = ?";
+                try (var stmtProduto = conexao.prepareStatement(sqlProduto)) {
+                    stmtProduto.setLong(1, id);
+                    stmtProduto.executeUpdate();
+                }
+
+                conexao.commit(); // Confirma a transação
+            } catch (SQLException e) {
+                conexao.rollback(); // Desfaz a transação em caso de erro
+                throw new Exception("Erro ao excluir produto: " + e.getMessage(), e);
+            }
         } catch (SQLException e) {
-            throw new Exception(e);
+            throw new Exception("Erro ao conectar ao banco de dados: " + e.getMessage(), e);
         }
     }
     

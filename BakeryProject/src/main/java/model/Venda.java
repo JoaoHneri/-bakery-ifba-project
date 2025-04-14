@@ -25,6 +25,10 @@ public class Venda {
         this.dataVenda = dataVenda;
     }
 
+    public Venda() {
+        
+    }
+
     public Long getId() {
         return id;
     }
