@@ -21,6 +21,7 @@ import model.Produto;
  *
  * @author joaoh
  */
+
 /**
  * Classe de Acesso a Dados (DAO) para a entidade Venda.
  * Responsável por todas as operações de banco de dados relacionadas a vendas.
