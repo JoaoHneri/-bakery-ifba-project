@@ -2,11 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
+
 package DAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import model.Venda;
 import Conexao.Conexao;
+import Interfaces.IVendaDAO;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -23,7 +25,7 @@ import model.Produto;
  * Classe de Acesso a Dados (DAO) para a entidade Venda.
  * Responsável por todas as operações de banco de dados relacionadas a vendas.
  */
-public class VendaDAO {
+public class VendaDAO implements IVendaDAO{
     
     /**
      * Salva uma nova venda no banco de dados e retorna seu ID gerado.
@@ -32,6 +34,7 @@ public class VendaDAO {
      * @return O ID gerado para a nova venda
      * @throws Exception Se ocorrer um erro durante a operação ou se nenhum ID for gerado
      */
+    @Override
     public Long salvarVenda(Venda venda) throws Exception {
         String sql = "INSERT INTO venda (idProduto, quantidade, valor, data_de_venda) VALUES (?, ?, ?, ?)";
 
@@ -73,7 +76,8 @@ public class VendaDAO {
      * @return Lista de vendas encontradas para o período, ordenadas por data (mais recente primeiro)
      * @throws RuntimeException Se ocorrer um erro durante a consulta ao banco de dados
      */
-    public List<Venda> buscarVendasPorMes(int mes, int ano) {
+    @Override
+     public List<Venda> buscarVendasPorMes(int mes, int ano) {
         Connection con = Conexao.getConexao();
         PreparedStatement stmt = null;
         ResultSet rs = null;

@@ -5,6 +5,7 @@
 package DAO;
 import model.Funcionario;
 import Conexao.Conexao;
+import Interfaces.IFuncionarioDAO;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -22,7 +23,7 @@ import java.util.List;
  * Classe que irá conter todas as funções que envolvem Funcionários e sua relação com o banco de dados.
  * Permite cadastrar, editar, visualizar e excluir funcionários.
  */
-public class FuncionarioDAO {
+public class FuncionarioDAO implements IFuncionarioDAO {
     
     /**
      * Insere um novo funcionário no banco de dados.
@@ -30,6 +31,7 @@ public class FuncionarioDAO {
      * @param funcionario O objeto Funcionario contendo os dados a serem inseridos
      * @throws RuntimeException Se ocorrer um erro durante a inserção no banco de dados
      */
+    @Override
     public void incluir(Funcionario funcionario) {
         Connection con = Conexao.getConexao();
         PreparedStatement stmt = null;
@@ -70,6 +72,7 @@ public class FuncionarioDAO {
      * @return Lista de Funcionario contendo todos os funcionários cadastrados
      * @throws RuntimeException Se ocorrer um erro durante a consulta ao banco de dados
      */
+    @Override
     public List<Funcionario> buscarTodos() {
         Connection con = Conexao.getConexao();
         PreparedStatement stmt = null;
@@ -113,6 +116,7 @@ public class FuncionarioDAO {
      * @return O objeto Funcionario correspondente ao ID fornecido
      * @throws RuntimeException Se o funcionário não for encontrado ou ocorrer um erro na consulta
      */
+    @Override
     public Funcionario buscarPorId(Long id) {
         Connection con = Conexao.getConexao();
         PreparedStatement stmt = null;
@@ -153,6 +157,7 @@ public class FuncionarioDAO {
      * @param funcionario O objeto Funcionario com os dados atualizados
      * @throws RuntimeException Se ocorrer um erro durante a atualização no banco de dados
      */
+    @Override
     public void atualizar(Funcionario funcionario) {
         Connection con = Conexao.getConexao();
         PreparedStatement stmt = null;
@@ -190,6 +195,7 @@ public class FuncionarioDAO {
      * @param id O ID do funcionário a ser removido
      * @throws RuntimeException Se ocorrer um erro durante a exclusão no banco de dados
      */
+    @Override
     public void excluir(Long id) {
         Connection con = Conexao.getConexao();
         PreparedStatement stmt = null;
@@ -212,6 +218,7 @@ public class FuncionarioDAO {
      * @return Lista de Funcionario contendo os resultados da busca
      * @throws RuntimeException Se ocorrer um erro durante a consulta ao banco de dados
      */
+    @Override
     public List<Funcionario> buscarPorNome(String nome) {
         Connection con = Conexao.getConexao();
         PreparedStatement stmt = null;

@@ -6,6 +6,7 @@ package DAO;
 
 import java.sql.Statement;
 import Conexao.Conexao;
+import Interfaces.IProdutoDAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import model.Produto;
@@ -23,7 +24,7 @@ import java.util.List;
  * Classe de Acesso a Dados (DAO) para a entidade Produto.
  * Fornece operações CRUD e outras funcionalidades relacionadas ao banco de dados para produtos.
  */
-public class ProdutoDAO {
+public class ProdutoDAO implements IProdutoDAO{
     
     /**
      * Salva um novo produto no banco de dados e retorna seu ID gerado.
@@ -32,6 +33,7 @@ public class ProdutoDAO {
      * @return O ID gerado do novo produto salvo
      * @throws Exception Se ocorrer um erro durante a operação no banco de dados ou se nenhum ID for gerado
      */
+    @Override
     public Long salvar(Produto produto) throws Exception {
         String sql = "INSERT INTO produto (nome, quantidade, valor, categoria) VALUES (?, ?, ?, ?)";
 
@@ -71,6 +73,7 @@ public class ProdutoDAO {
      * @return Uma lista com todos os produtos do banco de dados
      * @throws Exception Se ocorrer um erro durante a consulta ao banco de dados
      */
+    @Override
     public List<Produto> buscarTodos() throws Exception{
 
         var sql = "select * from produto";
@@ -105,6 +108,7 @@ public class ProdutoDAO {
      * @return O produto correspondente ao ID fornecido, ou null se não encontrado
      * @throws Exception Se ocorrer um erro durante a consulta ao banco de dados
      */
+    @Override
     public Produto buscarPorId(Long id) throws Exception{
 
         var sql = "select * from produto where id = ?";
@@ -135,6 +139,7 @@ public class ProdutoDAO {
      * @param produto O produto com os dados atualizados
      * @throws Exception Se ocorrer um erro durante a atualização no banco de dados
      */
+    @Override
     public void atualizar(Produto produto) throws Exception {
 
         var sql = "update produto set nome = ?, quantidade = ?, valor = ?, categoria = ? where id = ?";
@@ -158,6 +163,7 @@ public class ProdutoDAO {
      * @param id O ID do produto a ser excluído
      * @throws Exception Se ocorrer um erro durante a exclusão no banco de dados
      */
+    @Override
     public void excluir(Long id) throws Exception {
         try (var conexao = Conexao.getConexao()) {
             conexao.setAutoCommit(false); // Inicia uma transação
@@ -192,6 +198,7 @@ public class ProdutoDAO {
      * @return Uma lista de produtos que correspondem ao critério de busca
      * @throws Exception Se ocorrer um erro durante a consulta ao banco de dados
      */
+    @Override
     public List<Produto> buscarPorNome(String nomeParcial) throws Exception {
         var sql = "SELECT * FROM produto WHERE nome LIKE ?";
         List<Produto> produtos = new ArrayList<>();
@@ -229,6 +236,7 @@ public class ProdutoDAO {
      * @param quantidade A quantidade a ser adicionada (positiva) ou removida (negativa)
      * @throws Exception Se o produto não for encontrado ou ocorrer um erro durante a atualização
      */
+    @Override
     public void atualizarEstoque(Long idProduto, int quantidade) throws Exception {
         String sql = "UPDATE produto SET quantidade = quantidade + ? WHERE id = ?";
 
