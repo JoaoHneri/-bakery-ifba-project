@@ -47,6 +47,7 @@ public class RelatorioFrame extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         vendasField = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        anoSelecionador = new javax.swing.JComboBox<>();
 
         setClosable(true);
         setIconifiable(true);
@@ -89,6 +90,13 @@ public class RelatorioFrame extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Relatório Mensal de Vendas");
 
+        anoSelecionador.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2025", "2024", "2023", "2022" }));
+        anoSelecionador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                anoSelecionadorActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -106,6 +114,8 @@ public class RelatorioFrame extends javax.swing.JInternalFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(anoSelecionador, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
                                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 831, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(20, 20, 20))
@@ -116,7 +126,8 @@ public class RelatorioFrame extends javax.swing.JInternalFrame {
                 .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                    .addComponent(jLabel2)
+                    .addComponent(anoSelecionador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 389, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
@@ -133,8 +144,13 @@ public class RelatorioFrame extends javax.swing.JInternalFrame {
        atualizarRelatorio();
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
+    private void anoSelecionadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anoSelecionadorActionPerformed
+        atualizarRelatorio();
+    }//GEN-LAST:event_anoSelecionadorActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> anoSelecionador;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -148,9 +164,11 @@ public class RelatorioFrame extends javax.swing.JInternalFrame {
      * Função que captura o mês e chama a função de busca de vendas com o mês selecionado.
      */
     public void atualizarRelatorio() {
-        int mesSelecionado = jComboBox1.getSelectedIndex() + 1;
-        int anoAtual = Year.now().getValue();
-        carregarVendasDoMes(mesSelecionado, anoAtual);
+        int mesSelecionado = jComboBox1.getSelectedIndex() + 1; // Mês (1-12)
+        String anoSelecionado = (String) anoSelecionador.getSelectedItem(); // Pega o ano como String
+        int ano = Integer.parseInt(anoSelecionado); // Converte para int
+
+        carregarVendasDoMes(mesSelecionado, ano);
     }
     
     /**

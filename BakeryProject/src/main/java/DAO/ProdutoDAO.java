@@ -163,23 +163,21 @@ public class ProdutoDAO {
             conexao.setAutoCommit(false); // Inicia uma transação
 
             try {
-                // Primeiro exclui os registros da tabela venda que referenciam o produto
                 var sqlVendas = "delete from venda where idProduto = ?";
                 try (var stmtVendas = conexao.prepareStatement(sqlVendas)) {
                     stmtVendas.setLong(1, id);
                     stmtVendas.executeUpdate();
                 }
 
-                // Depois exclui o produto
                 var sqlProduto = "delete from produto where id = ?";
                 try (var stmtProduto = conexao.prepareStatement(sqlProduto)) {
                     stmtProduto.setLong(1, id);
                     stmtProduto.executeUpdate();
                 }
 
-                conexao.commit(); // Confirma a transação
+                conexao.commit(); 
             } catch (SQLException e) {
-                conexao.rollback(); // Desfaz a transação em caso de erro
+                conexao.rollback();
                 throw new Exception("Erro ao excluir produto: " + e.getMessage(), e);
             }
         } catch (SQLException e) {

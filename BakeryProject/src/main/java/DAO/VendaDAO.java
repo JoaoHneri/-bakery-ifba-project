@@ -57,7 +57,6 @@ public class VendaDAO {
                 }
             }
         } catch (SQLException e) {
-            // Adiciona mais informações ao erro
             throw new Exception("Erro ao salvar Venda: " + e.getMessage() + 
                               "\nSQL: " + sql + 
                               "\nValores: [" + venda.getProduto().getId()+ ", " + 
